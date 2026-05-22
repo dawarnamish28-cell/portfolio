@@ -1067,5 +1067,21 @@ const statObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.stat-card').forEach(c => statObs.observe(c));
 </script>
+  ...
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a[target="_blank"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.stopPropagation();
+      window.open(this.href, '_blank');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
 </body>
 </html>
