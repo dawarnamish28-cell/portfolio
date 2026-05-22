@@ -1025,18 +1025,29 @@ document.querySelectorAll('.project-card').forEach(card => {
 });
 
 /* ── RIPPLE BUTTONS ── */
-document.querySelectorAll('.btn').forEach(btn => {
+document.querySelectorAll('.btn, .project-link, .nav-btn, .footer-links a').forEach(btn => {
   btn.addEventListener('click', e => {
+    if (btn.href && btn.href.startsWith('http')) {
+      e.preventDefault();
+      window.open(btn.href, '_blank', 'noopener,noreferrer');
+    }
+
     const r = btn.getBoundingClientRect();
     const d = Math.max(r.width, r.height);
+
     const rp = document.createElement('span');
     rp.className = 'ripple';
-    rp.style.cssText = `width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
+    rp.style.cssText = `
+      width:${d}px;
+      height:${d}px;
+      left:${e.clientX-r.left-d/2}px;
+      top:${e.clientY-r.top-d/2}px
+    `;
+
     btn.appendChild(rp);
     setTimeout(() => rp.remove(), 700);
   });
 });
-
 /* ── STAGGER SKILLS ── */
 document.querySelectorAll('.skill-item').forEach((el, i) => { el.style.transitionDelay = `${i * 35}ms`; });
 
